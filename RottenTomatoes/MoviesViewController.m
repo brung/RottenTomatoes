@@ -1,20 +1,23 @@
 //
-//  MoviewViewController.m
+//  MoviesViewController.m
 //  RottenTomatoes
 //
-//  Created by Bruce Ng on 1/20/15.
+//  Created by Bruce Ng on 1/24/15.
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
 #import "MoviesViewController.h"
-#import "MovieCell.h"
+#import "MovieTableViewCell.h"
+#import "MovieDetailsViewController.h"
+#import "SVProgressHUD.h"
 #import "UIImageView+AFNetworking.h"
-#import "MovieDetailViewController.h"
 
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *movies;
 
+-(void) getRottenTomatoesMovies;
 
 @end
 
@@ -25,13 +28,17 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"Movies";
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = 120;
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"MovieTableViewCell" bundle:nil] forCellReuseIdentifier:@"MovieTableViewCell"];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
-    
+    [SVProgressHUD show];
     [self getRottenTomatoesMovies];
     
 }
@@ -42,19 +49,26 @@
 }
 
 - (void) getRottenTomatoesMovies {
-//    NsString * url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey="
-//    NSMutableString * url = [[NSMutableString alloc] initWithCString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=" encoding:@"UTF-8"];
-//
-//    NSString *apiKey = @"aqq8dpbxw2skrmqwpp9ty4rc";
-//    [url appendString:apiKey];
-    NSURL *url = [NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=aqq8dpbxw2skrmqwpp9ty4rc"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-   [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-       NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        self.movies = responseDictionary[@"movies"];
-        [self.tableView reloadData];
-        NSLog(@"response %@", responseDictionary);
+    NSLog(@"calling getRottenTomatoesMovies");
+    NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=aqq8dpbxw2skrmqwpp9ty4rc";
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError != nil) {
+            
+        } else {
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            self.movies = responseDictionary[@"movies"];
+            [self.tableView reloadData];
+        }
+
+        [SVProgressHUD dismiss];
+        [self.refreshControl endRefreshing];
     }];
+}
+
+- (void)onRefresh {
+    [self getRottenTomatoesMovies];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -62,20 +76,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     NSDictionary *movie = self.movies[indexPath.row];
+    MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieTableViewCell"];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"synopsis"];
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString:[movie valueForKeyPath:@"posters.thumbnail"]]];
+    
+    [cell.posterView setImageWithURL:[NSURL URLWithString:[movie valueForKeyPath:@"posters.thumbnail"]]];
+    
+    
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MovieDetailViewController *vc = [[MovieDetailViewController alloc] init];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    MovieDetailsViewController *vc = [[MovieDetailsViewController alloc] init];
     vc.movie = self.movies[indexPath.row];
     
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
+
 
 /*
 #pragma mark - Navigation

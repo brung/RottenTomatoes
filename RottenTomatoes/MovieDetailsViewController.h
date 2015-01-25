@@ -1,5 +1,5 @@
 //
-//  MoviesViewController.h
+//  MovieDetailsViewController.h
 //  RottenTomatoes
 //
 //  Created by Bruce Ng on 1/24/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MoviesViewController : UIViewController
-
+@interface MovieDetailsViewController : UIViewController
+@property (strong, nonatomic) NSDictionary *movie;
 @end

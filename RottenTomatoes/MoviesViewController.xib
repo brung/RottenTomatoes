@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviesViewController">
             <connections>
+                <outlet property="tabBar" destination="rio-LT-BSE" id="P4q-8i-mpg"/>
                 <outlet property="tableView" destination="tIJ-fA-MVo" id="lbu-XP-GyQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -16,12 +17,30 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tIJ-fA-MVo">
-                    <rect key="frame" x="-8" y="8" width="600" height="600"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tIJ-fA-MVo">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rio-LT-BSE">
+                    <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <items>
+                        <tabBarItem systemItem="favorites" id="zEr-jj-dXq"/>
+                        <tabBarItem systemItem="more" id="62h-Ab-s5q"/>
+                    </items>
+                </tabBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="rio-LT-BSE" firstAttribute="trailing" secondItem="tIJ-fA-MVo" secondAttribute="trailing" id="Ip6-0a-27b"/>
+                <constraint firstAttribute="bottom" secondItem="rio-LT-BSE" secondAttribute="bottom" id="Nu9-V9-7wm"/>
+                <constraint firstItem="tIJ-fA-MVo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U2O-FK-Mlh"/>
+                <constraint firstItem="rio-LT-BSE" firstAttribute="top" secondItem="tIJ-fA-MVo" secondAttribute="bottom" id="jpB-6j-KtT"/>
+                <constraint firstItem="tIJ-fA-MVo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mcs-fo-Nlp"/>
+                <constraint firstItem="rio-LT-BSE" firstAttribute="leading" secondItem="tIJ-fA-MVo" secondAttribute="leading" id="x92-gC-JC2"/>
+                <constraint firstAttribute="trailing" secondItem="tIJ-fA-MVo" secondAttribute="trailing" id="yDP-80-9BJ"/>
+            </constraints>
+            <point key="canvasLocation" x="-41" y="159"/>
         </view>
     </objects>
 </document>

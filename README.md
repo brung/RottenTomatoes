@@ -3,7 +3,7 @@ CodePath iOS Intro Class - Week 1 - Rotten Tomatoes
 
 Build an app to view Rotten Tomatoes movie data (latest box office) with poster images, titles, and synopsis.
 
-Time Spent: 3 hours
+Time Spent: 12 hours
 
 Completed user stories:
  * [x] Required: User can view a list of movies from Rotten Tomatoes. Poster images must be loading asynchronously.

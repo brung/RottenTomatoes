@@ -21,6 +21,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MoviesViewController *vc = [[MoviesViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    UINavigationBar *navbar = nvc.navigationBar;
+    [navbar setBarTintColor:[UIColor redColor]];
+    navbar.tintColor = [UIColor blackColor];
+    [navbar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIColor blackColor],
+                                    NSForegroundColorAttributeName,
+                                    [UIColor blackColor],
+                                    NSForegroundColorAttributeName,
+                                    nil]];
+    
     self.window.rootViewController = nvc;
     [self.window makeKeyAndVisible];
     return YES;

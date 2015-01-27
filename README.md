@@ -17,7 +17,7 @@ Completed user stories:
  * [x] Optional: All images fade in.
  * [x] Optional: For the large poster, load the low-res image first, switch to high-res when complete.
  * [ ] Optional: Customize the highlight and selection effect of the cell.
- * [ ] Optional: Customize the navigation bar.
+ * [x] Optional: Customize the navigation bar.
 
 Notes:
 

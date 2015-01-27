@@ -34,9 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Movies";
+    self.title = @"In Theaters";
     
     self.tabBar.delegate = self;
+    [self.tabBar setBarTintColor:[UIColor blackColor]];
+    self.tabBar.backgroundColor = [UIColor lightGrayColor];
+    self.tabBar.tintColor = [UIColor redColor];
     UITabBarItem *boxOfficeTab = [[UITabBarItem alloc] initWithTitle:@"Box Office" image:[UIImage imageNamed:@"boxoffice"] tag:BOX_OFFICE_TAB];
     UITabBarItem *dvdTab = [[UITabBarItem alloc] initWithTitle:@"DVD" image:[UIImage imageNamed:@"dvd"] tag:DVD_TAB];
     [self.tabBar setItems:@[boxOfficeTab, dvdTab]];
@@ -128,7 +131,6 @@
     cell.posterView.alpha = 0.25;
     [UIView animateWithDuration:0.9 animations:^{
         cell.posterView.alpha = 1;
-    } completion:^(BOOL finished) {
     }];
     return cell;
 }
@@ -136,17 +138,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     MovieDetailsViewController *vc = [[MovieDetailsViewController alloc] init];
+    //vc.hidesBottomBarWhenPushed = YES;
     vc.movie = self.movies[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     if (item.tag != self.currentTabBarItemTag) {
+        if (item.tag == DVD_TAB) {
+            self.title = @"DVD New Releases";
+        } else {
+            self.title = @"In Theaters";
+        }
         self.currentTabBarItemTag = item.tag;
         [self getRottenTomatoesMovies];
         NSLog(@"clicked %s",  [tabBar.selectedItem.title cStringUsingEncoding:NSUTF8StringEncoding]);
     }
-//    if (item != self.tabBar.selectedItem)
 }
 
 /*

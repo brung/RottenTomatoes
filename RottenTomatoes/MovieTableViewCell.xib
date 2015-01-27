@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,25 +15,40 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="American Sniper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9U-um-4Ln">
-                        <rect key="frame" x="95" y="8" width="217" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American Sniper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9U-um-4Ln">
+                        <rect key="frame" x="95" y="8" width="217" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="9y0-jf-sDp"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axi-VO-yhg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Axi-VO-yhg">
                         <rect key="frame" x="8" y="8" width="79" height="105"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="79" id="zMV-Vh-Ysb"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Nn-Vu-MPR">
-                        <rect key="frame" x="95" y="49" width="4295" height="63"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Nn-Vu-MPR">
+                        <rect key="frame" x="95" y="42" width="217" height="71"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                         <string key="text">Based on Frank Miller's latest graphic novel Xerxes and told in the breathtaking visual style of the blockbuster \"300,\" this new chapter of the epic saga takes the action to a fresh battlefield-on the sea-as Greek general Themistokles (Sullivan Stapleton) attempts to unite all of Greece by leading the charge that will change the course of the war. \"300: Rise of an Empire\" pits Themistokles against the massive invading Persian forces led by mortal-turned-god Xerxes (Rodrigo Santoro), and Artemisia (Eva Green), vengeful commander of the Persian navy. (c) WB</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.85618622448979598" green="0.85618622448979598" blue="0.85618622448979598" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Axi-VO-yhg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="J5l-7t-Ia5"/>
+                    <constraint firstItem="Axi-VO-yhg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N8m-YH-7wy"/>
+                    <constraint firstItem="Axi-VO-yhg" firstAttribute="top" secondItem="W9U-um-4Ln" secondAttribute="top" id="PC5-qv-Os4"/>
+                    <constraint firstItem="Axi-VO-yhg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bR7-YF-kc9"/>
+                    <constraint firstItem="W9U-um-4Ln" firstAttribute="leading" secondItem="Axi-VO-yhg" secondAttribute="trailing" constant="8" symbolic="YES" id="nfo-0Z-f08"/>
+                    <constraint firstItem="W9U-um-4Ln" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="oBF-s9-8NO"/>
+                </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="posterView" destination="Axi-VO-yhg" id="2L7-8F-VER"/>
                 <outlet property="synopsisLabel" destination="7Nn-Vu-MPR" id="XdV-Y3-bsI"/>
